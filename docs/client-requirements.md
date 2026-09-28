@@ -3,179 +3,280 @@
 ## 1. Client Information
 
 | Item | Details |
-|---|---|
+|--------|--------|
 | Client ID | CLI-118 |
 | Organisation | Taung Boxing Club (Taung) |
 | Industry | Sports |
 | Project | CMPG325 Computer Networks |
-| Assigned Addressing Block | 172.30.78.0/23 |
+| Assigned Address Block | 172.30.78.0/23 |
+| Assigned Networking Challenge | EtherChannel |
+| Change Request | CR15 – Second Internet Connection |
 
-## 2. Client Background
+---
 
-Taung Boxing Club is the assigned client organisation for this CMPG325
-Computer Networks project. The network solution is designed specifically
-for Taung Boxing Club and follows the requirements, constraints,
-addressing block, networking challenge and change request provided in the
-project brief.
+## 2. Project Background
 
-The solution must provide appropriate network connectivity and services
-for the organisation while allowing for future growth.
+Taung Boxing Club requires a reliable, scalable and secure computer network to support administrative operations, staff communication, member activities and guest connectivity.
+
+The network solution will be designed and implemented using Cisco Packet Tracer in accordance with the requirements specified in the CMPG325 project brief.
+
+The design must support current operational requirements while providing sufficient capacity for future expansion and growth.
+
+---
 
 ## 3. Network Requirements
 
-The Taung Boxing Club network must:
+The network must:
 
-- Provide reliable connectivity between appropriate network devices.
+- Provide reliable connectivity between all authorised devices.
 - Support communication between users and network services.
-- Provide appropriate network services for the organisation.
-- Use the assigned IP addressing block of 172.30.78.0/23.
-- Use an appropriate physical and logical network topology.
-- Use VLANs to separate different areas of the organisation's network.
+- Provide secure and organised network segmentation.
+- Use the assigned address block of 172.30.78.0/23.
 - Provide inter-VLAN communication where required.
-- Be implemented and simulated using Cisco Packet Tracer.
-- Be fully testable using connectivity and configuration tests.
-- Allow the network to accommodate expected user growth.
+- Support appropriate network services.
+- Support wireless connectivity for guest users.
+- Be fully implemented and tested using Cisco Packet Tracer.
+- Support future organisational growth.
+- Provide resilience through a secondary Internet connection.
+
+---
 
 ## 4. VLAN Requirements
 
-The proposed network separates users and services using VLANs:
+The network will use VLANs to separate users and services into logical groups.
 
 | VLAN | Name | Purpose |
-|---|---|---|
-| 10 | ADMIN | Administration users |
-| 20 | STAFF | Boxing club staff |
-| 30 | MEMBERS | Club members and member devices |
-| 40 | GUESTS | Guest network access |
-| 50 | SERVERS | Network servers and services |
-| 99 | MANAGEMENT | Network device management |
+|--------|--------|--------|
+| 10 | MANAGEMENT | Administrative and management devices |
+| 20 | STAFF | Staff and coaching personnel |
+| 30 | TRAINING | Training and member devices |
+| 40 | GUEST | Guest users and wireless clients |
+| 50 | SERVERS | Servers and network services |
+| 99 | NATIVE | Native VLAN for trunk links |
 
-VLAN separation improves network organisation and allows different groups
-of devices to be managed separately.
+### Benefits of VLAN Segmentation
 
-## 5. Addressing Requirement
+- Improved security
+- Reduced broadcast traffic
+- Better network performance
+- Easier administration
+- Improved scalability
 
-The assigned addressing block is:
+---
 
-**172.30.78.0/23**
+## 5. Addressing Requirements
 
-The addressing plan is designed using subnetting/VLSM to provide suitable
-address space for the different VLANs while allowing for future growth.
+The assigned IP address block for the project is:
 
-The network must accommodate an expected **40% user growth within three
-years**.
+```text
+172.30.78.0/23
+```
 
-## 6. Networking Challenge
+The addressing plan must:
+
+- Use only the assigned address block.
+- Provide separate subnets for each VLAN.
+- Support current and future devices.
+- Reserve address space for growth.
+- Use VLSM to improve address utilisation.
+
+The network must support an expected growth of approximately 40% within three years.
+
+---
+
+## 6. Assigned Networking Challenge
 
 ### EtherChannel (Link Aggregation)
 
-The assigned networking challenge for this project is:
+The assigned networking challenge for this project is EtherChannel.
 
-**EtherChannel (Link Aggregation)**
+EtherChannel combines multiple physical connections between switches into a single logical connection.
 
-The network must configure, verify and demonstrate EtherChannel.
+The implementation uses:
 
-The implementation uses multiple physical links between the switches as
-one logical link. LACP is used to negotiate and maintain the EtherChannel.
+- Link Aggregation Control Protocol (LACP)
+- Multiple physical switch links
+- Logical Port-Channels
+- Trunk connections carrying multiple VLANs
 
-The EtherChannel provides:
+### Benefits of EtherChannel
 
-- Increased link capacity.
-- Redundancy between the switches.
-- Improved availability.
-- A logical trunk connection between the switches.
+- Increased bandwidth
+- Redundancy
+- Improved reliability
+- Load balancing
+- Simplified management
 
-The EtherChannel configuration will be verified using Cisco IOS commands
-such as:
+### Verification Commands
 
-`show etherchannel summary`
+EtherChannel operation will be verified using:
 
-and
+```bash
+show etherchannel summary
+```
 
-`show interfaces trunk`
+```bash
+show interfaces trunk
+```
 
-## 7. Change Request – CR15
+Successful EtherChannel operation is indicated by:
 
-The client has requested that a **second Internet connection** be added
-for resilience.
+```text
+Po1(SU)
+Po2(SU)
+```
 
-The final network must accommodate this change request by providing a
-secondary Internet path.
+Where:
 
-The design will therefore include:
+- S = Layer 2 EtherChannel
+- U = EtherChannel in use
 
-- A primary Internet connection.
-- A secondary Internet connection.
-- Appropriate routing between the network and Internet connections.
-- Testing to demonstrate that the network can use the alternative
-  connection when the primary connection is unavailable.
+---
 
-## 8. Design Constraint
+## 7. Change Request CR15 – Second Internet Connection
 
-The main design constraint is:
+The client has requested a second Internet connection to improve network availability and resilience.
 
-**Expected 40% user growth within three years.**
+The final design must therefore include:
 
-The network addressing and topology must therefore provide sufficient
-capacity for future users and devices without requiring a complete redesign
-of the network.
+- Primary Internet connection
+- Secondary Internet connection
+- Appropriate routing configuration
+- Alternative connectivity path
+- Connectivity testing and failover verification
 
-## 9. Implementation Requirements
+This ensures that Internet access remains available if the primary connection becomes unavailable.
 
-The network will be designed and simulated using **Cisco Packet Tracer**.
+---
 
-The implementation must include appropriate:
+## 8. Scalability Requirement
 
-- Routers
-- Switches
-- End devices
+The network must support:
+
+```text
+40% user growth within three years
+```
+
+The design must therefore:
+
+- Allow additional users to be added.
+- Support future devices.
+- Reserve IP address space.
+- Avoid requiring a complete redesign.
+
+---
+
+## 9. Physical Network Requirements
+
+The implementation must include:
+
+### Network Infrastructure
+
+- Core Layer 3 Switch
+- Access Layer Switches
+- Primary Router
+- Secondary Router
+- Wireless Router / Access Point
+
+### End Devices
+
+- Management PC
+- Staff PCs
+- Guest PCs
+
+### Network Features
+
 - VLANs
-- Trunk links
-- IP addressing
-- Inter-VLAN routing
+- Trunk Links
 - EtherChannel
-- Internet connections
-- Routing and resilience configuration
+- Inter-VLAN Routing
+- Internet Connectivity
+
+---
 
 ## 10. Testing Requirements
 
-The completed network must be tested to confirm that it operates as
-required.
+The completed network must be tested to verify correct operation.
 
-Testing will include:
+### Connectivity Testing
 
-- Testing connectivity between devices.
-- Testing VLAN gateway connectivity.
-- Testing inter-VLAN communication.
-- Verifying VLAN configuration.
-- Verifying trunk links.
-- Verifying EtherChannel operation.
-- Testing the second Internet connection.
-- Testing resilience/failover where applicable.
-- Recording troubleshooting performed during implementation.
+- Device-to-device connectivity
+- Device-to-gateway connectivity
+- Inter-VLAN communication
+- End-to-end connectivity
 
-Screenshots and command outputs will be collected as evidence.
+### Configuration Verification
+
+- VLAN verification
+- Trunk verification
+- EtherChannel verification
+- Routing verification
+
+### Verification Commands
+
+```bash
+show vlan brief
+```
+
+```bash
+show interfaces trunk
+```
+
+```bash
+show etherchannel summary
+```
+
+```bash
+show ip interface brief
+```
+
+Screenshots and command outputs will be collected as evidence for the GitHub portfolio and final submission.
+
+---
 
 ## 11. Project Deliverables
 
-The project requires:
+### Milestone 1 – Client Design Review
 
-1. Client requirements documentation.
-2. Physical topology.
-3. Logical topology.
-4. IP addressing plan.
-5. Cisco Packet Tracer implementation.
-6. Configuration and testing evidence.
-7. Individual GitHub portfolio.
-8. Final Packet Tracer file.
-9. Technical documentation.
-10. Individual 15–20 minute video demonstration with an inset webcam view.
+- Client Requirements
+- Physical Topology
+- Logical Topology
+- IP Addressing Plan
+- Initial GitHub Repository
 
-## 12. Scope
+### Milestone 2 – Client Implementation Review
 
-This project remains specific to **Taung Boxing Club (Taung), Client ID
-CLI-118**.
+- Packet Tracer Implementation
+- EtherChannel Implementation
+- Testing Evidence
+- Updated GitHub Portfolio
 
-The solution follows the assigned addressing block, design constraint,
-EtherChannel networking challenge and CR15 change request. Additional
-features will not be introduced unless they are required to implement or
-support the specified project requirements.
+### Final Submission
+
+- Final Packet Tracer File
+- GitHub Portfolio
+- Technical Documentation
+- Video Demonstration
+- Supporting Evidence
+
+---
+
+## 12. Project Scope
+
+This project is specifically developed for:
+
+**Taung Boxing Club (Taung)**
+
+**Client ID: CLI-118**
+
+The solution follows the assigned addressing block, networking challenge and change request provided in the CMPG325 project brief.
+
+No additional features will be introduced unless required to support the stated project requirements.
+
+---
+
+## 13. Conclusion
+
+The proposed network provides a secure, scalable and reliable solution for Taung Boxing Club.
+
+The design incorporates VLAN segmentation, EtherChannel implementation, inter-VLAN routing, future growth planning and support for a secondary Internet connection while remaining aligned with the project requirements and assessment criteria.
